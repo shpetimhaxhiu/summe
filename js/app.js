@@ -3,7 +3,7 @@
 
 angular.module('addPlusMe', []).controller('addPlusMeController', addPlusMeController);
 
-LunchCheckController.$inject = ['$scope'];
+addPlusMeController.$inject = ['$scope'];
 
 function addPlusMeController($scope) {
 	$scope.dishes = "";
