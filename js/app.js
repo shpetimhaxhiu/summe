@@ -5,5 +5,4 @@ $(window).load(
     	self.location = "http://www.facebook.com";
     }
     console.log(response);
-})
-	);
+}));
