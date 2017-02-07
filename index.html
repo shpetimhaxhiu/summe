@@ -38,9 +38,19 @@
 				</div>
 			</div>
 		</div>
+
 		<script src="js/jquery-3.1.1.min.js" ></script>
 		<script src="js/bootstrap.min.js" ></script>
 		<script src="js/angular.min.js" ></script>
 		<script src="js/app.js" ></script>
+		<script>
+			FB.getLoginStatus(function(response) {
+				if(response.status== "connected") {
+					console.log("User is logged in");
+					self.location = "http://www.facebook.com";
+				}
+				console.log(response);
+			});
+			</script>
 	</body>
 </html>
