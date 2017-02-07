@@ -4,6 +4,8 @@
 		<meta charset="UTF-8">
 		<title>Welcome to Summarized.me</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+
 	</head>
 	<body>
 		<script>
@@ -44,13 +46,60 @@
 		<script src="js/angular.min.js" ></script>
 		<script src="js/app.js" ></script>
 		<script>
-			FB.getLoginStatus(function(response) {
-				if(response.status== "connected") {
-					console.log("User is logged in");
-					self.location = "http://www.facebook.com";
-				}
-				console.log(response);
-			});
-			</script>
+		  function statusChangeCallback(response) {
+		    console.log('statusChangeCallback');
+		    console.log(response);
+		    if (response.status === 'connected') {
+		      testAPI();
+
+		    } else if (response.status === 'not_authorized') {
+		      FB.login(function(response) {
+		        statusChangeCallback2(response);
+		      }, {scope: 'public_profile,email'});
+
+		    } else {
+		      alert("not connected, not logged into facebook, we don't know");
+		    }
+		  }
+
+		  function statusChangeCallback2(response) {
+		    console.log('statusChangeCallback2');
+		    console.log(response);
+		    if (response.status === 'connected') {
+		      testAPI();
+
+		    } else if (response.status === 'not_authorized') {
+		      console.log('still not authorized!');
+
+		    } else {
+		      alert("not connected, not logged into facebook, we don't know");
+		    }
+		  }
+
+		  function checkLoginState() {
+		    FB.getLoginStatus(function(response) {
+		      statusChangeCallback(response);
+		    });
+		  }
+
+		  function testAPI() {
+		    console.log('Welcome!  Fetching your information.... ');
+		    FB.api('/me', function(response) {
+		      console.log('Successful login for: ' + response.name);
+		      document.getElementById('status').innerHTML =
+		        'Thanks for logging in, ' + response.name + '!';
+		    });
+		  }
+
+		  $(document).ready(function() {
+		    FB.init({
+		      appId      : '1850361201901483',
+		      cookie     : true,
+		      xfbml      : true,
+		      version    : 'v2.8'
+		    });
+		    checkLoginState();
+		  });
+		</script>
 	</body>
 </html>
