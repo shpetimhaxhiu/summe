@@ -35,7 +35,7 @@
 
 					<fb:login-button 
 					  scope="public_profile,email"
-					  onlogin="checkLoginState();">
+					  ng-click="checkLoginState();">
 					</fb:login-button>
 					<button class="btn btn-success" onclick="onButtonClick()">Add me +</button>
 				<div id="status"></div>
@@ -59,7 +59,6 @@
 		      version    : 'v2.8'
 		    });
 		    FB.AppEvents.logPageView();
-		    checkLoginState();
 		  });
 		</script>
 	</body>
